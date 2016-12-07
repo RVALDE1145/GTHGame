@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout1" />
+    <TextView
+        android:text="Welcome to"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:textAlignment="center"
+        android:paddingLeft="145dp"
+        android:textSize="50px" />
+    <TextView
+        android:text="Guess the Hero"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textSize="100px"
+        android:textStyle="bold"
+        android:textColor="#0000FF"
+        android:paddingLeft="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp" />
+    <Button
+        android:text="Start Game!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnStart" />
+    <Button
+        android:text="Exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnExit" />
+</LinearLayout>
