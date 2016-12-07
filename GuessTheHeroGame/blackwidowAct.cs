@@ -13,7 +13,7 @@ using Android.Widget;
 namespace GuessTheHeroGame
 {
     [Activity(Label = "Activity1")]
-    public class blackwidowAct : Activity
+    public class blackwidowAct : Activity 
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
