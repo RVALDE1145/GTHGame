@@ -12,9 +12,18 @@ using Android.Widget;
 
 namespace GuessTheHeroGame
 {
+    
     [Activity(Label = "Activity1")]
     public class thorAct : Activity
     {
+        Button btnHintOne;
+        Button btnHintTwo;
+        Button btnHintThree;
+        Button btnGiveUp;
+        Button btnEnter;
+        TextView txtUserInput;
+        ImageView imgHero;
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -22,25 +31,32 @@ namespace GuessTheHeroGame
             SetContentView(Resource.Layout.thor);
 
             //GTH Game (copy&paste template for all heroes)
-            Button btnHintOne = FindViewById<Button>(Resource.Id.btnHintOne);
-            Button btnHintTwo = FindViewById<Button>(Resource.Id.btnHintTwo);
-            Button btnHintThree = FindViewById<Button>(Resource.Id.btnHintThree);
-            Button btnGiveUp = FindViewById<Button>(Resource.Id.btnGiveUp);
-            Button btnEnter = FindViewById<Button>(Resource.Id.btnEnter);
-            TextView txtUserInput = FindViewById<TextView>(Resource.Id.txtUserInput);
-            ImageView imgHero = FindViewById<ImageView>(Resource.Id.imgHero);
+            btnHintOne = FindViewById<Button>(Resource.Id.btnHintOne);
+            btnHintTwo = FindViewById<Button>(Resource.Id.btnHintTwo);
+            btnHintThree = FindViewById<Button>(Resource.Id.btnHintThree);
+            btnGiveUp = FindViewById<Button>(Resource.Id.btnGiveUp);
+            btnEnter = FindViewById<Button>(Resource.Id.btnEnter);
+            txtUserInput = FindViewById<TextView>(Resource.Id.txtUserInput);
+            imgHero = FindViewById<ImageView>(Resource.Id.imgHero);
 
             // user text and enter
             btnEnter.Click += delegate
             {
-                txtUserInput.Text.ToLower();
-
                 // answer in lowercase
-                if (txtUserInput.Text == "hero name")
+                if (txtUserInput.Text == "thor")
                 {
                     // reveal hero img
                     imgHero.SetBackgroundResource(Resource.Drawable.thor);
-                    // wait for a sec then open 
+                    txtUserInput.Text = "CORRECT!";
+                    btnGiveUp.Text = "Next";
+                    btnGiveUp.Click += delegate
+                    {                        
+                        imgHero.Dispose();
+                        GC.Collect();
+                        base.OnDestroy();
+                        StartActivity(typeof(blackwidowAct));
+                    };
+                    
                     // score activity
                     // 1 hint - 20pts 
                     // 2 hints - 10pts
@@ -50,8 +66,7 @@ namespace GuessTheHeroGame
                 else
                 {
                     // clear txtUserInput
-                    txtUserInput.Text = "";
-                    // popup dialog "incorrect. try again"
+                    txtUserInput.Text = "Wrong. Try Again.";                    
                 }
             };
 
@@ -79,11 +94,12 @@ namespace GuessTheHeroGame
             btnGiveUp.Click += delegate
             {
                 //reveal hero
-                imgHero.SetBackgroundResource(Resource.Drawable.thor);
+                imgHero.SetBackgroundResource(Resource.Drawable.thor);                              
                 txtUserInput.Text = "thor";
                 btnGiveUp.Text = "Next";
                 btnGiveUp.Click += delegate
-                {
+                {         
+                    imgHero.Dispose();
                     StartActivity(typeof(blackwidowAct));
                 };
 

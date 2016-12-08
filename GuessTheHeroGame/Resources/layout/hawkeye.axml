@@ -13,7 +13,8 @@
             android:layout_width="200dp"
             android:layout_height="35dp"
             android:layout_marginLeft="45dp"
-            android:layout_marginTop="7dp" />
+            android:layout_marginTop="7dp"
+            android:editable="true" />
         <Button
             android:text="Enter"
             android:id="@+id/btnEnter"

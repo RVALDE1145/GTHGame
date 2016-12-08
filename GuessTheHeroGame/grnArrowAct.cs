@@ -16,6 +16,13 @@ namespace GuessTheHeroGame
     [Activity(Label = "Activity1")]
     public class grnArrowAct : Activity
     {
+        Button btnHintOne;
+        Button btnHintTwo;
+        Button btnHintThree;
+        Button btnGiveUp;
+        Button btnEnter;
+        TextView txtUserInput;
+        ImageView imgHero;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -23,24 +30,31 @@ namespace GuessTheHeroGame
             SetContentView(Resource.Layout.greenArrow);
 
             //GTH Game (copy&paste template for all heroes)
-            Button btnHintOne = FindViewById<Button>(Resource.Id.btnHintOne);
-            Button btnHintTwo = FindViewById<Button>(Resource.Id.btnHintTwo);
-            Button btnHintThree = FindViewById<Button>(Resource.Id.btnHintThree);
-            Button btnGiveUp = FindViewById<Button>(Resource.Id.btnGiveUp);
-            Button btnEnter = FindViewById<Button>(Resource.Id.btnEnter);
-            TextView txtUserInput = FindViewById<TextView>(Resource.Id.txtUserInput);
-            ImageView imgHero = FindViewById<ImageView>(Resource.Id.imgHero);
+            btnHintOne = FindViewById<Button>(Resource.Id.btnHintOne);
+            btnHintTwo = FindViewById<Button>(Resource.Id.btnHintTwo);
+            btnHintThree = FindViewById<Button>(Resource.Id.btnHintThree);
+            btnGiveUp = FindViewById<Button>(Resource.Id.btnGiveUp);
+            btnEnter = FindViewById<Button>(Resource.Id.btnEnter);
+            txtUserInput = FindViewById<TextView>(Resource.Id.txtUserInput);
+            imgHero = FindViewById<ImageView>(Resource.Id.imgHero);
 
             // user text and enter
             btnEnter.Click += delegate
-            {
-                txtUserInput.Text.ToLower();
-
+            {                       
                 // answer in lowercase
-                if (txtUserInput.Text == "hero name")
+                if (txtUserInput.Text == "green arrow")
                 {
                     // reveal hero img
                     imgHero.SetBackgroundResource(Resource.Drawable.greenarrow);
+                    txtUserInput.Text = "CORRECT!";
+                    btnGiveUp.Text = "Next";
+                    btnGiveUp.Click += delegate
+                    {                        
+                        imgHero.Dispose();
+                        GC.Collect();
+                        base.OnDestroy();
+                        StartActivity(typeof(hawkeyeAct));
+                    };
                     // wait for a sec then open
                     // score activity
                     // 1 hint - 20pts 
@@ -51,15 +65,14 @@ namespace GuessTheHeroGame
                 else
                 {
                     // clear txtUserInput
-                    txtUserInput.Text = "";
+                    txtUserInput.Text = "Wrong. Try Again.";
                     // popup dialog "incorrect. try again"
                 }
             };
 
 
-
-            // btn hints and give up
-            btnHintOne.Click += delegate
+        // btn hints and give up
+        btnHintOne.Click += delegate
             {
                 btnHintOne.Text = "Uses a Bow";
                 btnHintOne.SetBackgroundColor(Android.Graphics.Color.Black);
@@ -81,23 +94,28 @@ namespace GuessTheHeroGame
             {
                 //reveal hero
                 imgHero.SetBackgroundResource(Resource.Drawable.greenarrow);
+                
                 txtUserInput.Text = "green arrow";
                 btnGiveUp.Text = "Next";
                 btnGiveUp.Click += delegate
-                {
+                {           
+                    imgHero.Dispose();
                     StartActivity(typeof(hawkeyeAct));
                 };
                 //no points
                 //score activity
-            };
+            };      
 
-        }
+            
 
-    
-        //public static void score()
-        //{
-           //score sequence
-        //}
-    }    
+
+    }
+
+
+    //public static void score()
+    //{
+    //score sequence
+    //}
+}    
 
 }
